@@ -6,7 +6,7 @@ The aim of this project is to build an Elevated RAG pipeline that can be tested 
 
 ## Part of the Project
 
-- Back-End:[Truffle-Folder](https://github.com/fanuelabebe/RefundByLocationSmartContract/tree/main/Truffle)
+- Back-End:[Backend-Folder](https://github.com/fanuelabebe/RefundByLocationSmartContract/tree/main/Truffle)
 - Front-End:[Android-Folder](https://github.com/fanuelabebe/Contract_Advisor_RAG/tree/main/AndroidClient)
 - Front-End:[React-Folder](https://github.com/fanuelabebe/Contract_Advisor_RAG/tree/main/frontend/contract-app)
 ---
