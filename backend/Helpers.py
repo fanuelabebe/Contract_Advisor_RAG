@@ -13,3 +13,5 @@ def get_result(query, passages, choice):
     rerankerrequest = RerankRequest(query=query, passages=passages)
     results = ranker.rerank(rerankerrequest)
     return results
+
+
