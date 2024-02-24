@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.fan.androidclient"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.fan.androidclient"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -46,4 +46,5 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.android.volley:volley:1.2.1")
+    implementation ("org.greenrobot:greendao:3.3.0")
 }
