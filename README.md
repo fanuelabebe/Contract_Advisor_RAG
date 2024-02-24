@@ -21,10 +21,10 @@ The aim of this project is to build an Elevated RAG pipeline that can be tested 
 4. `./Screenshots` - contains screenshots of the frontend UI
 ---
 ## Screenshots
-Home Page
+Home Screen
 ![Home Screen](./ScreenShots/home_screen.png)
 
-Login with MyAlgo
+Chat Page
 ![Chat Page](./ScreenShots/chat_page.png)
 ---
 ## Tech Stack
