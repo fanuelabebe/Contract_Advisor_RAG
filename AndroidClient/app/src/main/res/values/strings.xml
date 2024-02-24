@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">AndroidClient</string>
+    <string name="title">Lizzy AI</string>
+    <string name="sub_title">Chat with a contract</string>
+    <string name="chat_with_a_contract">Chat with a contract</string>
 </resources>
