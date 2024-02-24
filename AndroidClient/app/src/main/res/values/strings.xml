@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidClient</string>
+    <string name="title">Lizzy A</string>
+    <string name="sub_title">Chat with a contract</string>
 </resources>
