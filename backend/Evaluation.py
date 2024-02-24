@@ -10,11 +10,11 @@ from ragas.metrics import (
 
 class Evaluation:
 
-    def get_dataset(questions, ground_truths, rag_chain, retriever):
+    def get_dataset(self, questions, ground_truths, rag_chain, retriever):
         answers = []
         contexts = []
         for query in questions:
-            answers.append(rag_chain.invoke(query))
+            answers.append(rag_chain.run(query))
             contexts.append(
                 [docs.page_content for docs in retriever.get_relevant_documents(query)]
             )
@@ -27,7 +27,7 @@ class Evaluation:
 
         return Dataset.from_dict(data)
 
-    def evaluate_RAG(dataset):
+    def evaluate_RAG(self, dataset):
         result = evaluate(
             dataset=dataset,
             metrics=[
