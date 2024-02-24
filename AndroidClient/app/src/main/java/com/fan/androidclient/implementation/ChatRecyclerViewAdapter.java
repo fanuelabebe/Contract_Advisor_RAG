@@ -22,7 +22,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public List<ChatData> mChatDataList;
     public OnItemClick onItemClick;
     public int SENT_MESSAGE = 1;
-    public int RECEIVED_MESSAGE = 1;
+    public int RECEIVED_MESSAGE = 2;
     public interface OnItemClick{
         void onItemClick(ChatData chatData);
     }
@@ -100,7 +100,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             binding = recievedChatListItemBinding;
         }
         void setData(ChatData chatData){
-            binding.question.setText(chatData.getMessage());
+            binding.message.setText(chatData.getMessage());
             binding.date.setText(chatData.getDate());
         }
     }

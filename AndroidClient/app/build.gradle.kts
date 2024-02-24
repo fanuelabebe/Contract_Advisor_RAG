@@ -48,4 +48,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("org.greenrobot:greendao:3.3.0")
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("com.airbnb.android:lottie:3.7.0")
 }
