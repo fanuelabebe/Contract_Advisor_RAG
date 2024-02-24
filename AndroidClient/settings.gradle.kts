@@ -3,6 +3,14 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "org.greenrobot.greendao") {
+                useModule("org.greenrobot:greendao-gradle-plugin:3.3.0")
+            }
+        }
     }
 }
 dependencyResolutionManagement {

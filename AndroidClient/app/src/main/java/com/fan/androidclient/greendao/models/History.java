@@ -1,7 +1,9 @@
 package com.fan.androidclient.greendao.models;
 
+import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
-
+import org.greenrobot.greendao.annotation.Generated;
+@Entity
 public class History {
     @Id(autoincrement = true)
     private long Id;
@@ -12,8 +14,15 @@ public class History {
     public History() {
     }
 
-    public History(long id, String question, String answer, String reference) {
-        Id = id;
+    public History(String question, String answer, String reference) {
+        this.question = question;
+        this.answer = answer;
+        this.reference = reference;
+    }
+
+    @Generated(hash = 2117631711)
+    public History(long Id, String question, String answer, String reference) {
+        this.Id = Id;
         this.question = question;
         this.answer = answer;
         this.reference = reference;
