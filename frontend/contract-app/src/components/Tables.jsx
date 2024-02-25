@@ -2,30 +2,14 @@
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import api from '../api/api'
 function Tables (props){
-    
-    // const [tables,setTables] = useState([]);
-
-    // useEffect(() =>{
-    //     fetchTables();
-    // });
-
-    // const fetchTables = async () =>{
-    //     // const tables_r = [["Name","Title","Status","Position","Action"],["Name","Title","Status","Position","Action"],["Name","Title","Status","Position","Action"]];
-    //     // setTables(tables_r)
-    //     const response = await api.get('/ranks?prompt=who am i');
-    //     console.log(response.data);
-    //     setTables(response.data)
-    // }
-
-    
     return (
-        
         <MDBTable align='middle'>
             <MDBTableHead>
                 <tr>
-                <th scope='col'>Id</th>
-                <th scope='col'>Rank Name</th>
-                <th scope='col'>Rank Value</th>
+                <th scope='col'>Context Percision</th>
+                <th scope='col'>Context Recall</th>
+                <th scope='col'>Faithfulness</th>
+                <th scope='col'>Answer Relevancy</th>
                 </tr>
             </MDBTableHead>
             <MDBTableBody>
