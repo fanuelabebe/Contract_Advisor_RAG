@@ -20,6 +20,13 @@ The aim of this project is to build an Elevated RAG pipeline that can be tested 
 3. `./frontend/contract-app` - contains the implementation for react admin app
 4. `./Screenshots` - contains screenshots of the frontend UI
 ---
+## Screenshots
+Home Screen
+![Home Screen](./ScreenShots/home_screen.png)
+
+Chat Page
+![Chat Page](./ScreenShots/chat_page.png)
+---
 ## Tech Stack
 
 We have used the following techstacks for making this Application
