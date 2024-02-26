@@ -3,6 +3,7 @@ package com.fan.androidclient.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,6 +15,8 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.fan.androidclient.R;
 import com.fan.androidclient.databinding.ActivityChatBinding;
+import com.fan.androidclient.greendao.implementation.Insert;
+import com.fan.androidclient.greendao.models.History;
 import com.fan.androidclient.implementation.ChatRecyclerViewAdapter;
 import com.fan.androidclient.implementation.GsonParser;
 import com.fan.androidclient.implementation.Volley;
@@ -38,6 +41,7 @@ public class ChatActivity extends AppCompatActivity implements ChatRecyclerViewA
     public List<ChatData> chatDataList;
     Handler handler;
     ExecutorService executor;
+//    public String ragUrl = "http://10.0.2.2:8000/getanswer?question=";
     public String ragUrl = "http://192.168.43.74:8000/getanswer?question=";
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.US);
     @Override
@@ -52,6 +56,9 @@ public class ChatActivity extends AppCompatActivity implements ChatRecyclerViewA
         updateList();
     }
     public void setOnClickToViews(){
+        binding.topAppBar.setNavigationOnClickListener(view -> {
+            this.finish();
+        });
         binding.sendIV.setOnClickListener(view ->{
             String question = binding.chatET.getText().toString();
             if(!question.equals("")) {
@@ -63,6 +70,9 @@ public class ChatActivity extends AppCompatActivity implements ChatRecyclerViewA
                 Toast.makeText(ChatActivity.this,"Please write something",Toast.LENGTH_SHORT).show();
             }
         });
+        binding.historyIV.setOnClickListener(view->{
+            startActivity(new Intent(this,HistoryActivity.class));
+        });
     }
 
     public void getAnswer(String question){
@@ -72,6 +82,13 @@ public class ChatActivity extends AppCompatActivity implements ChatRecyclerViewA
         Volley volley = new Volley(ChatActivity.this,requestPackage,60 * 1000);
         volley.onCallDone = this;
         volley.getJsonObject();
+    }
+
+    public void saveToHistory(RagResponse ragResponse){
+        executor.execute(()->{
+            History history = new History(ragResponse.getQuestion(),ragResponse.getAnswer(),"",new Date());
+            Insert.insertHistoryData(ChatActivity.this,history);
+        });
     }
 
     public void addSentMessageToList(String question){
@@ -113,6 +130,7 @@ public class ChatActivity extends AppCompatActivity implements ChatRecyclerViewA
         RagResponse ragResponse = GsonParser.parseRagResponse(response.toString());
         if(ragResponse != null){
             addReceivedMessageToList(ragResponse.getAnswer());
+            saveToHistory(ragResponse);
         }
     }
 

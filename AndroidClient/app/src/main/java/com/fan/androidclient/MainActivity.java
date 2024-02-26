@@ -11,7 +11,7 @@ import com.fan.androidclient.ui.ChatActivity;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-    String [] contracts = {"Raptor Contract"};
+    String [] contracts = {"Robinson Contract","Raptor Contract"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

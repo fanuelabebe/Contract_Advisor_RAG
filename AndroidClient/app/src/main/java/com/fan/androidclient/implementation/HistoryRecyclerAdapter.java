@@ -1,5 +1,7 @@
 package com.fan.androidclient.implementation;
 
+import static com.fan.androidclient.ui.ChatActivity.simpleDateFormat;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fan.androidclient.R;
+import com.fan.androidclient.databinding.HistoryListItemBinding;
+import com.fan.androidclient.databinding.SentChatListItemBinding;
 import com.fan.androidclient.greendao.models.History;
+import com.fan.androidclient.models.ChatData;
 
 import java.util.List;
 
-public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecyclerAdapter.HistoryViewHolder> {
+public class HistoryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mContext;
     public List<History> mHistoryDataList;
     public OnItemClick onItemClick;
@@ -29,18 +34,20 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
     @NonNull
     @Override
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View viewV = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_list_item, parent, false);
-
-        return new HistoryViewHolder(viewV);
+        return new HistoryRecyclerAdapter.HistoryViewHolder(
+                HistoryListItemBinding.inflate(
+                        LayoutInflater.from(parent.getContext()),
+                        parent,
+                        false
+                )
+        );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         History history = mHistoryDataList.get(position);
-        holder.questionText.setText(history.getQuestion());
-        holder.answerText.setText(history.getAnswer());
-        holder.dateTextView.setText(history.getReference());
-        holder.referenceText.setText(history.getReference());
+        ((HistoryViewHolder) holder).setData(history);
+
         holder.itemView.setOnClickListener(view ->{
             onItemClick.onItemClick(history);
         });
@@ -50,18 +57,17 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
     public int getItemCount() {
         return mHistoryDataList.size();
     }
-    public class HistoryViewHolder extends RecyclerView.ViewHolder {
-        public TextView questionText;
-        public TextView answerText;
-        public TextView referenceText;
-        public TextView dateTextView;
-
-        public HistoryViewHolder(@NonNull View itemView) {
-            super(itemView);
-//            questionText = itemView.findViewById(R.id.sn_tv);
-//            answerText = itemView.findViewById(R.id.points_tv);
-//            dateTextView = itemView.findViewById(R.id.points_user_tv);
-
+    static class HistoryViewHolder extends RecyclerView.ViewHolder {
+        private final HistoryListItemBinding binding;
+        HistoryViewHolder(HistoryListItemBinding historyListItemBinding){
+            super(historyListItemBinding.getRoot());
+            binding = historyListItemBinding;
+        }
+        void setData(History history){
+            binding.question.setText("Q: " + history.getQuestion());
+            binding.answer.setText("A: "+ history.getAnswer());
+            binding.reference.setText(history.getReference());
+            binding.dateTV.setText(simpleDateFormat.format(history.getDate()));
         }
     }
 }
