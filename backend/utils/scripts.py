@@ -31,8 +31,15 @@ class RagOperations:
             texts, embeddings, collection_name="challenge_document"
         )
         llm = OpenAI(temperature=0)
-        return RetrievalQA.from_chain_type(llm, retriever=store.as_retriever())
+        retriever=store.as_retriever()
+        return RetrievalQA.from_chain_type(llm, retriever=retriever)
 
+    # def return_llm_chain(self, fileLoc):
+    #     documents = self.load_data(fileLoc)
+    #     chunks = self.return_chunks(documents)
+    #     chain = self.return_chain(chunks)
+    #     return chain
+    
     def get_rag_response(self, question, fileLoc):
         documents = self.load_data(fileLoc)
         chunks = self.return_chunks(documents)
