@@ -1,12 +1,7 @@
 from datasets import Dataset
-from ragas import evaluate
+
 from models import ResponseModel
-from ragas.metrics import (
-    faithfulness,
-    answer_relevancy,
-    context_recall,
-    context_precision,
-)
+
 
 
 class Evaluation:
@@ -77,6 +72,13 @@ class Evaluation:
         return Dataset.from_dict(data)
 
     def evaluate_RAG(self, dataset):
+        from ragas import evaluate
+        from ragas.metrics import (
+    faithfulness,
+    answer_relevancy,
+    context_recall,
+    context_precision,
+)
         result = evaluate(
             dataset=dataset,
             metrics=[

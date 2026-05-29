@@ -1,6 +1,6 @@
 # Contract Advisor RAG
 
-Lizzy AI is an early-stage Israeli startup, developing the next-generation contract AI. We leverage Hybrid LLM technology (edge, private cloud and LLM services), to build the first, fully autonomous, artificial contract lawyer. The first step in our journey is a powerful contract assistant, with the ultimate goal of developing a fully autonomous contract bot, capable of drafting, reviewing, and negotiating contracts, independently, end-to-end, without human assistance. 
+Lizzy AI is an early-stage startup, developing the next-generation contract AI. We leverage Hybrid LLM technology (edge, private cloud and LLM services), to build the first, fully autonomous, artificial contract lawyer. The first step in our journey is a powerful contract assistant, with the ultimate goal of developing a fully autonomous contract bot, capable of drafting, reviewing, and negotiating contracts, independently, end-to-end, without human assistance. 
 
 The aim of this project is to build an Elevated RAG pipeline that can be tested with RAGAs framework with the provided dataset.
 
