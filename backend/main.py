@@ -46,8 +46,12 @@ class RAGASResponseBase(BaseModel):
     answer_relevancy: str
 
 
-@app.get("/getanswer", response_model=RagResponseBase)
-async def return_answer(question: str, request: Request):
+class QuestionRequest(BaseModel):
+    question: str
+
+@app.post("/getanswer", response_model=RagResponseBase)
+async def return_answer(body: QuestionRequest, request: Request):
+    question = body.question
     if not question or not question.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty.")
     if len(question) > 500:
@@ -64,6 +68,10 @@ async def return_answer(question: str, request: Request):
         logger.error(f"Error in /getanswer: {e}")
         raise HTTPException(status_code=500, detail="Failed to generate answer.")
 
+@app.get("/health")
+async def health_check(request: Request):
+    chain_ready = hasattr(request.app.state, "chain") and request.app.state.chain is not None
+    return {"status": "ok" if chain_ready else "degraded", "chain_ready": chain_ready}
 
 @app.get("/getevaluation", response_model=List[RAGASResponseBase])
 async def return_evaluation(type: int):
