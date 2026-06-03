@@ -1,4 +1,4 @@
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.document_loaders import Docx2txtLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
@@ -6,15 +6,14 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from operator import itemgetter
-from models import ResponseModel
 from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
 
 
+load_dotenv()
 class RagOperations:
 
     def __init__(self) -> None:
-        load_dotenv()
         pass
 
     def load_data(self, fileLoc):
@@ -32,12 +31,13 @@ class RagOperations:
         retriever = store.as_retriever()
 
         prompt = ChatPromptTemplate.from_template("""
-Answer the question based only on the following context.
-If you cannot answer the question with the context, respond with 'I don't know':
+            Answer the question based only on the following context.
+            If you cannot answer the question with the context, respond with 'I don't know':
 
-Context: {context}
-Question: {question}
-""")
+            Context: {context}
+            Question: {question}
+            """
+        )
 
         chain = (
             {"context": itemgetter("question") | retriever, "question": itemgetter("question")}
@@ -61,10 +61,13 @@ Question: {question}
         )
         return store
     
-    def get_rag_response(self, question, fileLoc):
+    
+    def get_rag_response_chain(self, fileLoc):
         documents = self.load_data(fileLoc)
         chunks = self.return_chunks(documents)
         store = self.build_vector_store(chunks)
-        chain = self.build_chain(store)
+        return self.build_chain(store)
+
+    def get_rag_response(self, question, chain):
         result = chain.invoke({"question": question})
         return {"question": question, "answer": result["response"]}
